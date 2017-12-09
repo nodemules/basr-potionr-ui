@@ -1,0 +1,7 @@
+.Logo {
+  height: 80px;
+}
+
+.Logo-icon {
+  animation: App-logo-spin infinite 20s linear;
+}

@@ -1,0 +1,7 @@
+.PopoverImageLink .popover {
+  padding: 0;
+}
+
+.PopoverImageLink a {
+  cursor: pointer;
+}
