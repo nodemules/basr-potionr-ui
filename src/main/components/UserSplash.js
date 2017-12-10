@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './UserSplash.css';
 import {Button} from "reactstrap";
 import {logout} from "../services/Auth";
+import {withRouter} from "react-router-dom";
 
 class UserSplash extends Component {
 
@@ -23,13 +24,14 @@ class UserSplash extends Component {
             <p>You are now ready to start getting <code>basrd</code>!</p>
             <p>Click the button below to begin.</p>
           </div>
-          <div>
-            <Button>Start basrn'!</Button>
+          <div className="UserSplash-body">
+            <Button onClick={() => {
+              this.props.history.push("/potion")
+            }}>Start basrn'!</Button>
           </div>
-          <Button onClick={this.signOut}>Logout</Button>
         </div>
     );
   }
 }
 
-export default UserSplash;
+export default withRouter(UserSplash);

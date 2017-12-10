@@ -24,12 +24,10 @@ class LoginOrRegisterToggle extends Component {
     const REGISTER = "/register";
     return (
         <div className="LoginOrRegister-toggle">
-          <Button className="LoginOrRegister-home" color="primary"
-                  onClick={(() => this.go("/"))}>Home</Button>
           <ButtonGroup>
-            <Button
+            <Button outline
                 onClick={() => this.go(LOGIN)} active={this.state.path === LOGIN}>Login</Button>
-            <Button
+            <Button outline
                 onClick={() => this.go(REGISTER)} active={this.state.path === REGISTER}>Register</Button>
           </ButtonGroup>
         </div>

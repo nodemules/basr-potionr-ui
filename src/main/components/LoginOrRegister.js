@@ -4,9 +4,13 @@ import LoginForm from "./Login";
 import RegisterForm from "./Register";
 import {Link, Route, Switch} from "react-router-dom";
 import LoginOrRegisterToggle from "./LoginOrRegisterToggle";
+import {isLoggedIn} from "../services/Auth";
 
 class LoginOrRegister extends Component {
   render() {
+    if (isLoggedIn()) {
+      return null;
+    }
     return (
         <div className="LoginOrRegister">
           <Switch>
