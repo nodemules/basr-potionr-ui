@@ -4,6 +4,8 @@ import './App.css';
 import Logo from "./components/Logo";
 import LoginOrRegister from "./components/LoginOrRegister";
 import UserSplash from "./components/UserSplash";
+import Begin from "./components/Begin"
+import Fishies from "./components/Fishies"
 import {isLoggedIn} from "./services/Auth";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 
@@ -22,6 +24,8 @@ class App extends Component {
                 <Switch>
                   <AuthenticatedRoute path="/authenticated" authenticated={isLoggedIn}
                          component={UserSplash}/>
+                  <AuthenticatedRoute path="/begin" authenticated={isLoggedIn} component={Begin}/>
+                  <AuthenticatedRoute path="/fishies" authenticated={isLoggedIn} component={Fishies}/>
                   <Route exact path="/" component={LoginOrRegister}/>
                 </Switch>
               </div>

@@ -9,11 +9,17 @@ class UserSplash extends Component {
     super(props);
 
     this.signOut = this.signOut.bind(this);
+    this.toBasrBegin = this.toBasrBegin.bind(this);
+
   }
 
   signOut() {
     logout();
     this.props.history.push('/')
+  }
+
+  toBasrBegin() {
+    this.props.history.push('/begin')
   }
 
   render() {
@@ -24,9 +30,11 @@ class UserSplash extends Component {
             <p>Click the button below to begin.</p>
           </div>
           <div>
-            <Button>Start basrn'!</Button>
+            <Button onClick={this.toBasrBegin}>Start basrn'!</Button>
           </div>
-          <Button onClick={this.signOut}>Logout</Button>
+          <div>
+            <Button onClick={this.signOut}>Logout</Button>
+          </div>
         </div>
     );
   }
