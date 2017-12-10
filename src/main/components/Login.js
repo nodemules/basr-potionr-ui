@@ -33,7 +33,7 @@ class Login extends Component {
     };
     if (login(user)) {
       console.log('User is logged in, proceeding to authenticated state');
-      this.props.history.push('/authenticated')
+      this.props.history.push("/");
     }
   };
 

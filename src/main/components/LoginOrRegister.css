@@ -1,3 +1,26 @@
+@media all and (min-width: 480px) {
+  .LoginOrRegister {
+    padding: 30px 0;
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}
+
+@media all and (min-width: 720px) {
+
+  .LoginOrRegister {
+    max-width: 640px;
+  }
+}
+
 .LoginOrRegister-toggle {
   padding-bottom: 30px;
+}
+
+.LoginOrRegister-toggle button:focus {
+  box-shadow: none;
+}
+
+.LoginOrRegister-home {
+  margin-right: 30px;
 }

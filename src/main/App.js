@@ -1,14 +1,23 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from "react-router-dom"
+import {BrowserRouter, Switch} from "react-router-dom"
 import './App.css';
 import Logo from "./components/Logo";
 import LoginOrRegister from "./components/LoginOrRegister";
 import UserSplash from "./components/UserSplash";
-import {isLoggedIn} from "./services/Auth";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+import {isLoggedIn} from "./services/Auth";
+
+function LoginOrRegisterTemplate() {
+  if (isLoggedIn()) {
+    return null;
+  }
+  return (
+      <LoginOrRegister/>
+  );
+}
 
 class App extends Component {
-
   render() {
     return (
         <BrowserRouter>
@@ -20,10 +29,10 @@ class App extends Component {
             <div>
               <div className="App-body">
                 <Switch>
-                  <AuthenticatedRoute path="/authenticated" authenticated={isLoggedIn}
-                         component={UserSplash}/>
-                  <Route exact path="/" component={LoginOrRegister}/>
+                  <AuthenticatedRoute path="/" component={UserSplash}/>
                 </Switch>
+                {/*<UnauthenticatedRoute path="/" component={LoginOrRegister}/>*/}
+                <LoginOrRegisterTemplate />
               </div>
             </div>
           </div>

@@ -24,7 +24,17 @@ export function logout() {
 
 export function isLoggedIn() {
   let authenticationState = getAuthenticationState();
-  return !!authenticationState && new Date(authenticationState.expires) > new Date();
+  if (!authenticationState) {
+    return false;
+  }
+  console.log(authenticationState);
+  let expireTime = new Date(authenticationState.expires);
+  let expired =  expireTime < new Date();
+  if (expired) {
+    console.log(`Token is expired at ${expireTime}`);
+    logout();
+  }
+  return !expired;
 }
 
 function getAuthenticationState() {

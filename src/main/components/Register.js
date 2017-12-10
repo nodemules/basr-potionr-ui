@@ -35,12 +35,6 @@ class Register extends Component {
   };
 
   handleChange = (event) => {
-    console.log(event.target.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
-    console.log(`
-    id: ${event.target.id},
-    x-model: ${event.target.model},
-    value: ${event.target.value}
-    `)
     this.setState({
       [event.target.model]: event.target.value
     });
