@@ -9,7 +9,7 @@ class PotionHistory extends Component {
 
     this.state = {
       showFullHistory: false
-    }
+    };
 
     this.toggleShowFullHistory = this.toggleShowFullHistory.bind(this);
   }

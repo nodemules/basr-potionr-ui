@@ -1,0 +1,12 @@
+.PotionStat-progress {
+  height: 30px;
+}
+
+.PotionStat-percentageText {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from "react-router-dom"
+import {BrowserRouter, Route} from "react-router-dom"
 import './App.css';
 import Logo from "./components/Logo";
 import LoginOrRegister from "./components/LoginOrRegister";
@@ -7,7 +7,7 @@ import UserSplash from "./components/UserSplash";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import TopNav from "./components/TopNav";
 import About from "./components/About";
-import Potion from "./components/Potion";
+import Potion from "./components/potion/PotionBrewing";
 
 class App extends Component {
   render() {

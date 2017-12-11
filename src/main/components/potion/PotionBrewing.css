@@ -1,0 +1,8 @@
+.Potion-tron-buttons :not(:first-child) {
+  margin-left: 10px;
+}
+
+.Potion-tron-buttons .btn-warning-dark {
+  color: white;
+  background-color: darkorange;
+}
