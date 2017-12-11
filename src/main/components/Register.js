@@ -14,44 +14,72 @@ class Register extends Component {
         password: '',
       },
       confirmPassword: '',
-      serviceAgreement: false
-    }
+      serviceAgreement: false,
 
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.validate = this.validate.bind(this);
   }
 
-  validate = () => {
+  validate() {
     let valid = true;
     if (!this.state.serviceAgreement) {
       return false;
     }
-    this.state.user.map(function (value, key) {
+    if (this.state.user.password !== this.state.confirmPassword) {
+      return;
+    }
+    Object.entries(this.state.user).forEach(([key, value]) => {
       if (key && value.length === 0) {
         valid = false;
         return false;
       }
-      return true;
     });
     return valid;
   };
 
-  handleChange = (event) => {
+  handleChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    // TODO - figure out the best way to "recursively" set nested state properties
+    let split = name.split(".");
+    if (split.length > 1) {
+      let first = split[0];
+      let second = split[1];
+      let nested = Object.assign({}, this.state[first]);
+      nested[second] = value;
+      this.setState({
+        [first]: nested
+      });
+      return;
+    }
+
     this.setState({
-      [event.target.id]: event.target.value
+      [name]: value
     });
-  };
+  }
+
+  submit(user) {
+    // TODO - use axios or something to do AJAX to REST API
+    console.log("Submitting user via AJAX:", user);
+  }
 
   render() {
+    let formValid = this.validate();
     return (
         <div className="Register">
           <Alert>
             Sign up for free today!
           </Alert>
-          <form>
+          <form onSubmit={this.submit}>
             <FormGroup>
               <Label>Username</Label>
               <Input
                   id="username"
-                  model="user.username"
+                  name="user.username"
                   value={this.state.user.username}
                   onChange={this.handleChange}
                   placeholder="Enter a username"
@@ -61,7 +89,8 @@ class Register extends Component {
               <Label>E-mail Address</Label>
               <Input
                   id="email"
-                  model="user.email"
+                  type="email"
+                  name="user.email"
                   value={this.state.user.email}
                   onChange={this.handleChange}
                   placeholder="Enter your e-mail address"
@@ -71,7 +100,7 @@ class Register extends Component {
               <Label>Password</Label>
               <Input
                   id="password"
-                  model="user.password"
+                  name="user.password"
                   type="password"
                   value={this.state.user.password}
                   onChange={this.handleChange}
@@ -82,19 +111,26 @@ class Register extends Component {
               <Label>Confirm Password</Label>
               <Input
                   id="confirmPassword"
-                  model="confirmPassword"
-                  type="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
                   value={this.state.confirmPassword}
                   onChange={this.handleChange}
-                  placeholder="Enter your confirmPassword"
               />
             </FormGroup>
             <Label>
-            <Input type="checkbox" value={this.state.serviceAgreement}/>
+              <Input type="checkbox"
+                     name="serviceAgreement"
+                     value={this.state.serviceAgreement}
+                     onChange={this.handleChange}
+              />
               I agree to the terms of service.
             </Label>
           </form>
-          <Button disabled={!this.validate()}>Submit</Button>
+          <Button disabled={!formValid}
+                  onClick={() => this.submit(this.state.user)}
+          >
+            Submit
+          </Button>
         </div>
     );
   }
