@@ -23,7 +23,7 @@ class App extends Component {
               <div className="App-body">
                 <AuthenticatedRoute path="/" component={UserSplash}/>
                 <Route exact path="/about" component={About}/>
-                <Route exact path="/potion" component={Potion}/>
+                <Route path="/potion" component={Potion}/>
                 <LoginOrRegister/>
               </div>
             </div>

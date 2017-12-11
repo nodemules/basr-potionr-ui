@@ -5,7 +5,7 @@ import {
   NavbarBrand, NavbarToggler,
   NavItem, NavLink, UncontrolledDropdown
 } from "reactstrap";
-import {isLoggedIn} from "../services/Auth";
+import {isLoggedIn, logout} from "../services/Auth";
 import {withRouter} from "react-router-dom";
 
 class TopNav extends Component {
@@ -43,19 +43,32 @@ class TopNav extends Component {
                     Options
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem onClick={() => this.props.history.push('/login')}>
-                      Login
-                    </DropdownItem>
-                    <DropdownItem onClick={() => this.props.history.push('/register')}>
-                      Register
-                    </DropdownItem>
-                    <DropdownItem divider/>
-                    <DropdownItem onClick={() => this.props.history.push('/about')}>
+                    {
+                      !isLoggedIn() ? //
+                          <div>
+                            <DropdownItem
+                                onClick={() => this.props.history.push("/login")}>
+                              Login
+                            </DropdownItem>
+                            <DropdownItem
+                                onClick={() => this.props.history.push("/register")}>
+                              Register
+                            </DropdownItem>
+                            <DropdownItem divider/>
+                          </div>
+                          : null
+                    }
+                    <DropdownItem
+                        onClick={() => this.props.history.push("/about")}>
                       About
                     </DropdownItem>
                     {
                       isLoggedIn() ? //
-                          <DropdownItem>
+                          <DropdownItem onClick={() => {
+                            logout();
+                            this.props.history.push("/");
+                          }
+                          }>
                             Logout
                           </DropdownItem>
                           : null

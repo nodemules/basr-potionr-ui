@@ -36,7 +36,7 @@ class Register extends Component {
 
   handleChange = (event) => {
     this.setState({
-      [event.target.model]: event.target.value
+      [event.target.id]: event.target.value
     });
   };
 
@@ -48,16 +48,6 @@ class Register extends Component {
           </Alert>
           <form>
             <FormGroup>
-              <Label>E-mail Address</Label>
-              <Input
-                  id="email"
-                  x-model="user.email"
-                  value={this.state.user.email}
-                  onChange={this.handleChange}
-                  placeholder="Enter your e-mail address"
-              />
-            </FormGroup>
-            <FormGroup>
               <Label>Username</Label>
               <Input
                   id="username"
@@ -65,6 +55,16 @@ class Register extends Component {
                   value={this.state.user.username}
                   onChange={this.handleChange}
                   placeholder="Enter a username"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>E-mail Address</Label>
+              <Input
+                  id="email"
+                  model="user.email"
+                  value={this.state.user.email}
+                  onChange={this.handleChange}
+                  placeholder="Enter your e-mail address"
               />
             </FormGroup>
             <FormGroup>

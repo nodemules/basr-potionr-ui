@@ -1,0 +1,7 @@
+.PopoverButton {
+  display: inline-block;
+}
+
+.PopoverButton-popover {
+  max-width: 372px;
+}
