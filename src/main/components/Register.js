@@ -28,7 +28,7 @@ class Register extends Component {
       return false;
     }
     if (this.state.user.password !== this.state.confirmPassword) {
-      return;
+      return false;
     }
     Object.entries(this.state.user).forEach(([key, value]) => {
       if (key && value.length === 0) {

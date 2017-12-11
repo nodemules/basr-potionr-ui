@@ -27,7 +27,6 @@ export function isLoggedIn() {
   if (!authenticationState) {
     return false;
   }
-  console.log(authenticationState);
   let expireTime = new Date(authenticationState.expires);
   let expired =  expireTime < new Date();
   if (expired) {
