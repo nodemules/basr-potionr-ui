@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import {Route} from "react-router-dom";
 import {Alert} from "reactstrap";
 import PropTypes from "prop-types";
+import {PotionTypes} from "./Potion";
 
 class PotionBrewed extends Component {
   static propTypes = {
@@ -13,38 +13,22 @@ class PotionBrewed extends Component {
 
   render() {
     let isBatch = this.props.batch.length > 0;
+    if (isBatch) {
+      return (
+          <Alert color="dark">
+            You brewed {this.props.batch.length} potions!
+          </Alert>
+      )
+    }
+    let potion = this.props.potion;
+    if (!potion) {
+      return null;
+    }
+    let type = PotionTypes.findByName(potion.name);
     return (
-        <div>
-          {
-            isBatch ? //
-                <div>
-                  <Alert color="dark">
-                    You brewed {this.props.batch.length} potions!
-                  </Alert>
-                </div>
-                : null
-          }
-          <Route path="/potion/fizz" render={() => (
-              <div>
-                <Alert color="warning">Made a fizzy potion!</Alert>
-              </div>
-          )}/>
-          <Route path="/potion/pop" render={() => (
-              <div>
-                <Alert color="success">Made a poppy potion!</Alert>
-              </div>
-          )}/>
-          <Route path="/potion/tonic" render={() => (
-              <div>
-                <Alert color="info">Made a tonic potion!</Alert>
-              </div>
-          )}/>
-          <Route path="/potion/magic" render={() => (
-              <div>
-                <Alert color="danger">Made a magic potion!</Alert>
-              </div>
-          )}/>
-        </div>
+        <Alert color={type.getColor()}>
+          Made a {potion.name} potion!
+        </Alert>
     );
   }
 }

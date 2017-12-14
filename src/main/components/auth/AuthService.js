@@ -1,4 +1,6 @@
 const AUTHENTICATION_STATE = 'BASR_USER';
+const AUTHENTICATION_DURATION_MINUTES = 15;
+const AUTH_DURATION = AUTHENTICATION_DURATION_MINUTES * 60 * 1000;
 
 export function login(user) {
   if (!authenticate(user)) {
@@ -6,7 +8,7 @@ export function login(user) {
   }
   let authenticationState = {
     user: user,
-    expires: new Date(new Date().getTime() + 60000)
+    expires: new Date(new Date().getTime() + AUTH_DURATION)
   };
 
   localStorage.setItem(AUTHENTICATION_STATE,
@@ -36,7 +38,7 @@ export function isLoggedIn() {
     return false;
   }
   let expireTime = new Date(authenticationState.expires);
-  let expired =  expireTime < new Date();
+  let expired = expireTime < new Date();
   if (expired) {
     console.log(`Token is expired at ${expireTime}`);
     logout();
