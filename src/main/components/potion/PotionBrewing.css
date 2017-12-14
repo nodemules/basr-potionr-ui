@@ -1,0 +1,7 @@
+.jumbotron * button:not(:first-child) {
+  margin-left: 10px;
+}
+
+.PotionBrewing-potion-actions {
+  margin-bottom: 15px;
+}

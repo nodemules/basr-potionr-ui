@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-class Potion {
+export class Potion {
   constructor(name, time) {
     this.name = name;
     this.time = time;
@@ -15,7 +15,7 @@ class Potion {
   }
 }
 
-class PotionService {
+export class PotionService {
   static brewRandomPotion() {
     let types = Object.entries(PotionTypes);
     let names = types.map(([k, v]) => v.name);
@@ -25,8 +25,6 @@ class PotionService {
   }
 
 }
-
-export default PotionService;
 
 class PotionType {
   constructor(name, color) {

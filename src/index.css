@@ -8,3 +8,8 @@ button, button:active, button:focus {
   box-shadow: none !important;
   outline: none !important;
 }
+
+.btn-warning-dark {
+  color: white;
+  background-color: darkorange;
+}

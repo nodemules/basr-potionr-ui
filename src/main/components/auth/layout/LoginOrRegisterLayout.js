@@ -28,7 +28,7 @@ class LoginOrRegisterLayout extends Component {
                 <p>To get <code>basrd</code>, login and collect potions
                   now!
                 </p>
-                <LoginForm/>
+                <LoginForm />
               </div>
             </Route>
             <Route exact path="/register">

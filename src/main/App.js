@@ -5,7 +5,7 @@ import Logo from "./components/Logo";
 import LoginOrRegister from "./components/auth/layout/LoginOrRegisterLayout";
 import TopNav from "./components/nav/TopNav";
 import About from "./components/About";
-import Potion from "./components/potion/layout/PotionBrewingLayout";
+import Potion from "./components/potion/layout/PotionLayout";
 import Home from "./components/home/layout/HomeLayout";
 
 class App extends Component {

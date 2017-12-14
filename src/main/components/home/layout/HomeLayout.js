@@ -4,7 +4,6 @@ import AuthenticatedItem from "../../auth/AuthenticatedItem";
 import UserSplash from "../UserSplash";
 
 class HomeLayout extends Component {
-
   render() {
     return (
         <div className="Home">
