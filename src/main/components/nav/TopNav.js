@@ -5,8 +5,9 @@ import {
   NavbarBrand, NavbarToggler,
   NavItem, NavLink, UncontrolledDropdown
 } from "reactstrap";
-import {isLoggedIn, logout} from "../services/Auth";
+import {isLoggedIn, logout} from "../auth/AuthService";
 import {withRouter} from "react-router-dom";
+import AuthenticatedItem from "../auth/AuthenticatedItem";
 
 class TopNav extends Component {
   constructor(props) {
@@ -31,9 +32,11 @@ class TopNav extends Component {
             <NavbarBrand href="/">basr potionr</NavbarBrand>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink href="/potion">Potions</NavLink>
-                </NavItem>
+                <AuthenticatedItem>
+                  <NavItem>
+                    <NavLink href="/potion">Potions</NavLink>
+                  </NavItem>
+                </AuthenticatedItem>
                 <NavItem>
                   <NavLink
                       href="https://github.com/nodemules/basr-potionr-ui">Github</NavLink>
@@ -47,11 +50,13 @@ class TopNav extends Component {
                       !isLoggedIn() ? //
                           <div>
                             <DropdownItem
-                                onClick={() => this.props.history.push("/login")}>
+                                onClick={() => this.props.history.push(
+                                    "/login")}>
                               Login
                             </DropdownItem>
                             <DropdownItem
-                                onClick={() => this.props.history.push("/register")}>
+                                onClick={() => this.props.history.push(
+                                    "/register")}>
                               Register
                             </DropdownItem>
                             <DropdownItem divider/>

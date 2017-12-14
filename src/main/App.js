@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route} from "react-router-dom"
 import './App.css';
 import Logo from "./components/Logo";
-import LoginOrRegister from "./components/LoginOrRegister";
-import UserSplash from "./components/UserSplash";
-import AuthenticatedRoute from "./components/AuthenticatedRoute";
-import TopNav from "./components/TopNav";
+import LoginOrRegister from "./components/auth/layout/LoginOrRegisterLayout";
+import TopNav from "./components/nav/TopNav";
 import About from "./components/About";
-import Potion from "./components/potion/PotionBrewing";
+import Potion from "./components/potion/layout/PotionBrewingLayout";
+import Home from "./components/home/layout/HomeLayout";
 
 class App extends Component {
   render() {
@@ -21,9 +20,9 @@ class App extends Component {
             <TopNav/>
             <div>
               <div className="App-body">
-                <AuthenticatedRoute path="/" component={UserSplash}/>
-                <Route exact path="/about" component={About}/>
+                <Route exact path="/" component={Home}/>
                 <Route path="/potion" component={Potion}/>
+                <Route exact path="/about" component={About}/>
                 <LoginOrRegister/>
               </div>
             </div>

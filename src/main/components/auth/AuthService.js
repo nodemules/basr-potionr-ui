@@ -22,6 +22,14 @@ export function logout() {
   localStorage.removeItem(AUTHENTICATION_STATE);
 }
 
+export function whoami() {
+  let authState = getAuthenticationState();
+  if (!authState) {
+    return null;
+  }
+  return authState.user;
+}
+
 export function isLoggedIn() {
   let authenticationState = getAuthenticationState();
   if (!authenticationState) {

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './Login.css';
 import {Alert, Button, FormGroup, Input, Label} from "reactstrap";
-import {login} from "../services/Auth";
-import { withRouter } from 'react-router';
+import {login} from "./AuthService";
+import {withRouter} from 'react-router-dom';
 
 class Login extends Component {
 
@@ -32,7 +32,6 @@ class Login extends Component {
       username: this.state.username
     };
     if (login(user)) {
-      console.log('User is logged in, proceeding to authenticated state');
       this.props.history.push("/");
     }
   };
@@ -64,7 +63,8 @@ class Login extends Component {
               />
             </FormGroup>
           </form>
-          <Button disabled={!this.validate()} onClick={this.submit}>Submit</Button>
+          <Button disabled={!this.validate()}
+                  onClick={this.submit}>Submit</Button>
         </div>
     );
   }
