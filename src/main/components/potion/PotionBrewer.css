@@ -1,0 +1,14 @@
+.PotionBrewer-progress {
+  margin: 15px 0;
+  height: 30px;
+  background-color: #9f9f9f;
+}
+
+.PotionBrewer-progress-text {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+}
