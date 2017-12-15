@@ -31,15 +31,22 @@ export function login(user) {
 export function register(user) {
   let deferred = q.defer();
 
-  return axios.request({
+  axios.request({
     url: "/auth/register",
     method: 'post',
     baseURL: `https://${host}:${port}` + base,
     data: user
   })
   .then(() => login(user))
-  .then(deferred.resolve)
-  .catch(deferred.reject);
+  .catch((err) => {
+    if (err.response) {
+      deferred.reject(err.response.data);
+    } else if (err.request) {
+      deferred.reject(err.request);
+    } else {
+      deferred.reject();
+    }
+  });
 
   return deferred.promise;
 }

@@ -28,6 +28,8 @@ class Register extends Component {
     let user = this.state.user;
     register(user).then(() => {
       this.props.history.push("/");
+    }).catch((err) => {
+      console.error("There was an error", err);
     });
   }
 
