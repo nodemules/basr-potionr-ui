@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './Register.css';
 import {Alert, Button, FormGroup, Input, Label} from "reactstrap";
+import {register} from "./AuthService";
+import {withRouter} from "react-router-dom";
 
 class Register extends Component {
 
@@ -14,12 +16,19 @@ class Register extends Component {
         password: '',
       },
       confirmPassword: '',
-      serviceAgreement: false,
-
+      serviceAgreement: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.validate = this.validate.bind(this);
+    this.submit = this.submit.bind(this);
+  }
+
+  submit() {
+    let user = this.state.user;
+    register(user).then(() => {
+      this.props.history.push("/");
+    });
   }
 
   validate() {
@@ -60,11 +69,6 @@ class Register extends Component {
     this.setState({
       [name]: value
     });
-  }
-
-  submit(user) {
-    // TODO - use axios or something to do AJAX to REST API
-    console.log("Submitting user via AJAX:", user);
   }
 
   render() {
@@ -136,4 +140,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default withRouter(Register);

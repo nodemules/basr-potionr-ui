@@ -28,12 +28,17 @@ class Login extends Component {
   };
 
   submit() {
-    let user = {
-      username: this.state.username
-    };
-    if (login(user)) {
+    let {username, password} = this.state;
+    this.setState({
+      loggingIn: true
+    });
+    login({username, password}).then(() => {
       this.props.history.push("/");
-    }
+    }).catch(() => {
+      this.setState({
+        loggingIn: false
+      });
+    });
   };
 
   render() {

@@ -1,23 +1,58 @@
+import * as axios from "axios";
+import * as q from "q";
+import {configuration} from "../../../config/properties";
+
 const AUTHENTICATION_STATE = 'BASR_USER';
 const AUTHENTICATION_DURATION_MINUTES = 15;
 const AUTH_DURATION = AUTHENTICATION_DURATION_MINUTES * 60 * 1000;
+const {host, port, base} = configuration.rest;
 
 export function login(user) {
-  if (!authenticate(user)) {
-    return false;
-  }
-  let authenticationState = {
-    user: user,
-    expires: new Date(new Date().getTime() + AUTH_DURATION)
-  };
+  let deferred = q.defer();
 
-  localStorage.setItem(AUTHENTICATION_STATE,
-      JSON.stringify(authenticationState));
-  return true;
+  authenticate(user).then(() => {
+    let {username} = user;
+    let authenticationState = {
+      user: {
+        username
+      },
+      expires: new Date(new Date().getTime() + AUTH_DURATION)
+    };
+
+    localStorage.setItem(AUTHENTICATION_STATE,
+        JSON.stringify(authenticationState));
+
+    deferred.resolve();
+  }).catch(deferred.reject);
+
+  return deferred.promise;
+}
+
+export function register(user) {
+  let deferred = q.defer();
+
+  return axios.request({
+    url: "/auth/register",
+    method: 'post',
+    baseURL: `https://${host}:${port}` + base,
+    data: user
+  })
+  .then(() => login(user))
+  .then(deferred.resolve)
+  .catch(deferred.reject);
+
+  return deferred.promise;
 }
 
 function authenticate(user) {
-  return user && !!user.username && user.username.length;
+  let {username, password} = user;
+  return axios.request({
+    url: "/auth/login",
+    baseURL: `https://${host}:${port}` + base,
+    auth: {
+      username, password
+    }
+  });
 }
 
 export function logout() {
