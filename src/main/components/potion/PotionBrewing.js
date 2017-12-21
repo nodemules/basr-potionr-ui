@@ -8,6 +8,13 @@ import {Button, Jumbotron} from "reactstrap";
 import "./PotionBrewing.css";
 import PotionBrewer from "./PotionBrewer";
 import {Route, Switch} from "react-router-dom";
+import SockJS from "sockjs-client";
+import * as Stomp from "stompjs";
+import {configuration} from "../../../config/properties";
+
+const {host, port} = configuration.rest;
+
+let sock, stompClient;
 
 class PotionBrewing extends Component {
   constructor(props) {
@@ -23,6 +30,19 @@ class PotionBrewing extends Component {
     this.brewPotion = this.brewPotion.bind(this);
     this.brewRandomPotion = this.brewRandomPotion.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentWillMount() {
+    sock = new SockJS(`https://${host}:${port}/sock/potion`);
+    stompClient = Stomp.over(sock);
+    stompClient.connect({}, function (frame) {
+      console.log('Connected: ' + frame);
+      stompClient.subscribe('/topic/potion', function (potion) {
+        console.log(potion);
+      });
+      stompClient.send("/sock/potion/name", {}, "foo");
+      stompClient.send("/sock/potion/type", {}, "bar");
+    });
   }
 
   brewRandomPotions(num) {
@@ -92,7 +112,7 @@ class PotionBrewing extends Component {
                 let type = PotionTypes.findByName(v.name);
                 return (
                     <Route key={i} path={`/potion/brew/${type.name}`}>
-                      <PotionBrewer type={type} />
+                      <PotionBrewer type={type}/>
                     </Route>
                 )
               })

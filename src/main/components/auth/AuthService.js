@@ -37,7 +37,7 @@ export function register(user) {
     baseURL: `https://${host}:${port}` + base,
     data: user
   })
-  .then(() => login(user))
+  .then(deferred.resolve)
   .catch((err) => {
     if (err.response) {
       deferred.reject(err.response.data);
